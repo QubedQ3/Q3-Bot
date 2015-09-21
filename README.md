@@ -7,7 +7,7 @@ Home to Q3's source code for our IRC bot!
       
 **You can find all the links to 3rd-Party Libraries over at [our wiki](https://github.com/QubedQ3/Q3-Bot/wiki/3rd-Party-Libraries)**.
 
-How to use start scripts.
+**How to use start scripts:**
 
 On Windows - Place startBot.bat file  in the same directory as the Q3-Bot<version>.jar. 
 	Double click startBot to start the bot.
