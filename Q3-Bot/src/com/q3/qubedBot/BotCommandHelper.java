@@ -357,7 +357,7 @@ public class BotCommandHelper {
 		String[] splitMessage = message.split(" ");
 		if (splitMessage.length == 2)
 		{
-			parentBot.sendAction(channel, "highfives " + splitMessage[1] + ".");
+			parentBot.sendAction(channel, "highfives " + splitMessage[1] + " and " + sender + " in an epic 3-person highfive.");
 		}
 		else
 		{
