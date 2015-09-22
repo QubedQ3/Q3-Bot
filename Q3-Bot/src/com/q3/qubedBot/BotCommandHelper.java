@@ -218,7 +218,7 @@ public class BotCommandHelper {
 				else{
 					Main.removeBot(botToDisconnect);
 					parentBot.sendNotice(sender, "Successfully disconnected from " + splitMessage[1]);
-				} 
+				}
 			}
 		}else{
 			parentBot.sendNotice(sender, "You must be an OP to use this command");
@@ -350,7 +350,7 @@ public class BotCommandHelper {
 		@Override
 		public void run() {
 			if (isOp){
-				if (!Pattern.matches("join(?: ([\\w\\-\\.:]+)(?: ([^\\s\\t\\n\\r]+))?)?(?: (#[^\\s\\t\\n\\r]+)(?: ([^\\s\\t\\n\\r]+))?)+", message)){
+				if (!Pattern.matches(ServBot.commandStart + "?join(?: ([\\w\\-\\.:]+)(?: ([^\\s\\t\\n\\r]+))?)?(?: (#[^\\s\\t\\n\\r]+)(?: ([^\\s\\t\\n\\r]+))?)+", message)){
 					parentBot.sendNotice(sender, "Syntax Error. Correct usage to get this bot to connect to:");
 					parentBot.sendNotice(sender, "A channel on this server is " + ServBot.commandStart + "join <#channel> [password]");
 					parentBot.sendNotice(sender, "A channel on another server is " + ServBot.commandStart + "join <server> [pass] <#channel> [password]");
@@ -363,7 +363,7 @@ public class BotCommandHelper {
 					if (splitMessage[1].startsWith("#")){
 						bot = parentBot;
 					} else {
-						bot = Main.getBotConnectedTo(splitMessage[1]);	
+						bot = Main.getBotConnectedTo(splitMessage[1]);
 						if (bot == null){
 							String pass = splitMessage[2].startsWith("#") ? null : splitMessage[2];
 							IRCServer newServ = new IRCServer(splitMessage[1]);
@@ -389,7 +389,7 @@ public class BotCommandHelper {
 							else{
 								success = bot.joinIRCChannel(channel);
 							}
-							
+
 							if (success){
 								parentBot.sendNotice(sender, "Successfully joined " + splitMessage[i]);
 							}else{
