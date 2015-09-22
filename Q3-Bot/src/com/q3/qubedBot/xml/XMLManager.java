@@ -67,7 +67,9 @@ public class XMLManager {
 					//save ops for this channel
 					Element elemCurrChannelOps = new Element("Ops");//<Ops>
 					for (String currOp:currChannel.getOpList()){
-						elemCurrChannelOps.addContent(new Element(currOp));//<opName/>
+						Element elemCurrOp = new Element("Op"); //<Op Name="">
+						elemCurrOp.setAttribute("Name", currOp);
+						elemCurrChannelOps.addContent(elemCurrOp);//<opName/>
 					}
 					elemCurrChannel.addContent(elemCurrChannelOps);// </Ops>
 					currServerChannels.addContent(elemCurrChannel); //</Channel>
@@ -133,8 +135,8 @@ public class XMLManager {
 				String currChannelPass = elemCurrChannel.getAttributeValue("Pass");
 				Element elemOps = elemCurrChannel.getChild("Ops");
 				Set<String> ops = new HashSet<String>();
-				for (Element elemCurrOp:elemOps.getChildren()){
-					ops.add(elemCurrOp.getName());
+				for (Element elemCurrOp:elemOps.getChildren("Op")){
+					ops.add(elemCurrOp.getAttributeValue("Name"));
 				}
 				IRCChannel currChannel = new IRCChannel(currChannelName, currChannelPass, ops);
 				channels.add(currChannel);
