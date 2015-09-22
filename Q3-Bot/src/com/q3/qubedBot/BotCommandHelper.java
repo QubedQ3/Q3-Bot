@@ -22,7 +22,7 @@ public class BotCommandHelper {
 		parentBot = qubedBot;
 	}
 
-	public void runBotCommand(ServBot qubedBot, String channel, String sender, String message, String lowercaseCommand) {
+	public void runBotCommand(String channel, String sender, String message, String lowercaseCommand) {
 		boolean isOp = false;
 		if (channel.equalsIgnoreCase(sender)){ //private message!
 			for (IRCChannel currChannel:parentBot.getIRCServer().getChannels()){
@@ -32,7 +32,7 @@ public class BotCommandHelper {
 				}
 			}
 		} else{
-			isOp = parentBot.getIRCServer().getChannel(channel).checkOp(sender);
+			isOp = parentBot.getIRCServer().getChannel(channel).checkOp(sender) || parentBot.getOwner().equalsIgnoreCase(sender);
 		}
 		switch(lowercaseCommand){ //substring removes the command section of the string
 		case("addcommand"):
@@ -80,13 +80,16 @@ public class BotCommandHelper {
                 case("slap"):
 			slap(channel, sender, message);
 		break;
+		case("slap"):
+			
+		break;
 		default:
 			String response = Main.getResponse(lowercaseCommand);
 			if (response != null){
-				qubedBot.sendMessage(channel, response);
+				parentBot.sendMessage(channel, response);
 			}
 			else{
-				qubedBot.sendNotice(sender, lowercaseCommand + " is an invalid command, please ensure it is spelled correctly");
+				parentBot.sendNotice(sender, lowercaseCommand + " is an invalid command, please ensure it is spelled correctly");
 			}
 
 		}

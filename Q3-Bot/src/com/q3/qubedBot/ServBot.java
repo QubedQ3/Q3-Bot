@@ -305,7 +305,7 @@ public class ServBot extends PircBot {
 		if (message.startsWith(commandStart)){
 
 			String lowercaseCommand = message.toLowerCase(Locale.ROOT).split(" ")[0].substring(ServBot.commandStart.length());
-			commandHelper.runBotCommand(this, channel, sender, message, lowercaseCommand);
+			commandHelper.runBotCommand(channel, sender, message, lowercaseCommand);
 		}
 
 	}
@@ -320,7 +320,7 @@ public class ServBot extends PircBot {
 		if (lowercaseCommand.startsWith(commandStart)){
 			lowercaseCommand = lowercaseCommand.substring(commandStart.length()); //supports inclusion or not of the command character on private message.
 		}
-		commandHelper.runBotCommand(this, sender, sender, message, lowercaseCommand); //considers user the channel to send response back to.
+		commandHelper.runBotCommand(sender, sender, message, lowercaseCommand); //considers user the channel to send response back to.
 	}
 
 	/* (non-Javadoc)
