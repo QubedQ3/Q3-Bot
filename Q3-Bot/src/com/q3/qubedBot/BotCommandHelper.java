@@ -350,7 +350,7 @@ public class BotCommandHelper {
 		@Override
 		public void run() {
 			if (isOp){
-				if (!Pattern.matches("^join(?: ([\\w\\-\\.:]+)(?: ([^\\s\\t\\n\\r]+))?)?(?: (#[^\\s\\t\\n\\r]+)(?: ([^\\s\\t\\n\\r]+))?)+", message.substring(ServBot.commandStart.length()))){
+				if (!Pattern.matches("join(?: ([\\w\\-\\.:]+)(?: ([^\\s\\t\\n\\r]+))?)?(?: (#[^\\s\\t\\n\\r]+)(?: ([^\\s\\t\\n\\r]+))?)+", message)){
 					parentBot.sendNotice(sender, "Syntax Error. Correct usage to get this bot to connect to:");
 					parentBot.sendNotice(sender, "A channel on this server is " + ServBot.commandStart + "join <#channel> [password]");
 					parentBot.sendNotice(sender, "A channel on another server is " + ServBot.commandStart + "join <server> [pass] <#channel> [password]");
