@@ -41,7 +41,7 @@ public class ServBot extends PircBot {
 	private boolean savePass = false;
 
 	/**Version of the bot*/
-	public static final String version = "C3 Java IRC Bot - V0.5.W";
+	public static final String version = "Q3 Java IRC Bot - V0.5.W";
 	/**String that this bot will recognize as a command to it*/
 	public static final String commandStart = "!";
 
