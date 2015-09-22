@@ -361,7 +361,7 @@ public class ServBot extends PircBot {
 			if(!opList.contains(recipient)){
 				currChannel.addOp(recipient);
 				try {
-					if(Main.save())sendMessage(channel, recipient + " has been added to this bots known Ops");
+					if(Main.save())sendMessage(channel, "Updated this bots known Ops");
 				} catch (IOException e) {
 					sendMessage(channel, "Error occured while saving bot config. :[");
 					e.printStackTrace();
@@ -382,7 +382,7 @@ public class ServBot extends PircBot {
 			if(opList.contains(recipient)){
 				currChannel.removeOp(recipient);
 				try {
-					if(Main.save())sendMessage(channel, recipient + " has been removed from this bots known Ops");
+					if(Main.save())sendMessage(channel, "Updated this bots known Ops");
 				} catch (IOException e) {
 					sendMessage(channel, "Error occured while saving bot config. :[");
 					e.printStackTrace();
@@ -407,7 +407,7 @@ public class ServBot extends PircBot {
 		}
 		StringBuilder output = new StringBuilder("Bot initialized.");
 		if (opAdded){
-			output.append(" Updated this bots known Ops");
+			output.append("Updated this bots known Ops");
 		}
 		try {
 			if(Main.save())sendMessage(channel, output.toString());
