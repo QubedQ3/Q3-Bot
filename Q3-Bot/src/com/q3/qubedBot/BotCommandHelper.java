@@ -74,6 +74,9 @@ public class BotCommandHelper {
 		case("listchannels"):
 			getChannels(channel, message, sender);
 		break;
+		case("highfive"):
+			parentBot.sendAction(channel, " highfives " + sender);
+		break;
 		default:
 			String response = Main.getResponse(lowercaseCommand);
 			if (response != null){
