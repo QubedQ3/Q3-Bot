@@ -49,7 +49,7 @@ public class BotCommandHelper {
 		break;
 		case("join"):
 			Thread thread = new Thread(new JoinRunnable(sender, message, isOp));
-		thread.start();
+			thread.start();
 		break;
 		case("shutdown"):
 			shutdownBot(sender, message, isOp);
@@ -77,11 +77,8 @@ public class BotCommandHelper {
 		case("highfive"):
 			highfive(channel, sender, message);
 		break;
-                case("slap"):
-			slap(channel, sender, message);
-		break;
 		case("slap"):
-			
+			slap(channel, sender, message);
 		break;
 		default:
 			String response = Main.getResponse(lowercaseCommand);
@@ -344,24 +341,24 @@ public class BotCommandHelper {
 
 	}
 
-    private void slap(String channel, String sender, String message) {
-        String[] splitMessage = message.split(" ");
+	private void slap(String channel, String sender, String message) {
+		String[] splitMessage = message.split(" ");
 		if (splitMessage.length == 2)
-                {
-                    parentBot.sendAction(channel, "slaps " + splitMessage[1] + " with a smelly trout.");
-                }
+		{
+			parentBot.sendAction(channel, "slaps " + splitMessage[1] + " with a smelly trout.");
+		}
 		else
 		{
 			parentBot.sendAction(channel, "slaps " + sender + " with a smelly trout.");
 		}
 	}
 
-    private void highfive(String channel, String sender, String message) {
-        String[] splitMessage = message.split(" ");
+	private void highfive(String channel, String sender, String message) {
+		String[] splitMessage = message.split(" ");
 		if (splitMessage.length == 2)
-                {
-                    parentBot.sendAction(channel, "highfives " + splitMessage[1] + ".");
-                }
+		{
+			parentBot.sendAction(channel, "highfives " + splitMessage[1] + ".");
+		}
 		else
 		{
 			parentBot.sendAction(channel, "highfives " + sender + ".");
