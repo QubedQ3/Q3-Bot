@@ -89,28 +89,44 @@ public class ServBot extends PircBot {
 			String newServer = Main.readConsole("Please enter a server address.\n");
 			server = new IRCServer(newServer);
 		}
-		try {
-			this.connect(server.getServerAddress(), server.getServerPort());//TODO add support for saving port numbers and server passwords
+		String pass = "";
+		boolean identPass = true;
+		if (loginPass != null){
+			pass = loginPass;
+			savePass = true;
+		}
+		else{
+			pass = new String(Main.readConsolePass(String.format("\nPlease enter the password to verify the bot on %s\n", this.server.getServerAddress())));
+		}
+		try{
+			this.connect(server.getServerAddress(), server.getServerPort());
+		}catch (IOException e1) {
+			e1.printStackTrace();
+			return;
+		} catch (IrcException e1) {
+			if (loginPass == null) return; //connection was refused and no password was supplied
+			try {
+				connect(server.getServerAddress(), server.getServerPort(), loginPass);
+				identPass = false;
+			} catch (IOException | IrcException e) {
+				e.printStackTrace();
+				return; //connection was refused even with password
+			}
+		}
+		try{
 			while (!isConnected()){//wait till successfully connected
 				Thread.sleep(5000);
 			}
 			//verify login
-			String pass;
-			if (loginPass != null){
-				pass = loginPass;
-				savePass = true;
+			if (identPass && !pass.isEmpty()){
+				if(!this.getName().equals(this.getNick())){//bot has a secondary name. GHOST primary nickname and then take it!
+					sendMessage("NickServ", "GHOST " + this.getName() + " " + pass);
+					Thread.sleep(1000);
+					changeNick(this.getName());
+				}
+				identify(pass);
 			}
-			else{
-				Thread.sleep(5000);
-				pass = new String(Main.readConsolePass(String.format("\nPlease enter a password to verify the bot on %s\n", this.server.getServerAddress())));
-			}
-			if(!this.getName().equals(this.getNick())){//bot has a secondary name. GHOST primary nickname and then take it!
-				sendMessage("NickServ", "GHOST " + this.getName() + " " + pass.toString());
-				Thread.sleep(1000);
-				changeNick(this.getName());
-			}
-			if (!pass.isEmpty())identify(pass);
-			Thread.sleep(1000);
+			Thread.sleep(5000);
 			if (server.getChannelNames().size() == 0){ //if no default channels then connect to a new ones
 				String newChannel = Main.readConsole("Please enter a channel name to connect to.\n");
 				while (!newChannel.startsWith("#")){
@@ -130,9 +146,6 @@ public class ServBot extends PircBot {
 			Main.save();
 		} catch (IOException e){//TODO how to manage exceptions? return to console?
 			//
-		} catch (IrcException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
