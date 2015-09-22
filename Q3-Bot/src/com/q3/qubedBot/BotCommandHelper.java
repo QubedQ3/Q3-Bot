@@ -104,7 +104,11 @@ public class BotCommandHelper {
 				total += currRoll;
 			}
 			// TODO <String.join> is not java 1.7 compatible. Throws error when running on server.
-			parentBot.sendMessage(channel, String.format("%s rolled a %d (Individual rolls: %s)", sender, total, String.join(", ", rolls)));
+			StringBuilder allRolls = new StringBuilder(rolls[0]);
+			for (int i = 1; i < rolls.length; i++){
+				allRolls.append(", " + rolls[i]);
+			}
+			parentBot.sendMessage(channel, String.format("%s rolled a %d (Individual rolls: %s)", sender, total, allRolls));
 		}
 	}
 
