@@ -89,6 +89,8 @@ public class ServBot extends PircBot {
 			String newServer = Main.readConsole("Please enter a server address.\n");
 			server = new IRCServer(newServer);
 		}
+		//Twitch requires all lowercase
+		if (server.getServerAddress().equalsIgnoreCase("irc.twitch.tv"))setName(getName().toLowerCase());
 		String pass = "";
 		boolean identPass = true;
 		if (loginPass != null){
@@ -162,6 +164,7 @@ public class ServBot extends PircBot {
 	public boolean connectCommand(){
 		if (isConnected()) return false;
 		if (server == null) return false;
+		else if (server.getServerAddress().equalsIgnoreCase("irc.twitch.tv"))setName(getName().toLowerCase());
 		this.setAutoNickChange(true);
 		boolean identPass = true; //true if supplied pass is for nickserv, false if pass is for server
 		try {
