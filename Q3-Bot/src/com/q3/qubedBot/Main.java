@@ -5,8 +5,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.jdom2.JDOMException;
@@ -25,6 +27,8 @@ public class Main {
 
 	private static List<ServBot> bots;
 	private static Map<String, String> commands;
+
+
 	private static List<String> streamersTwitch;
 	private static boolean noSave = false;
 	private static boolean devEnviro = false; //if system.console() returns null then set this true
@@ -142,6 +146,13 @@ public class Main {
 	 */
 	public synchronized static String putCommand(String command, String response){
 		return commands.put(command, response);
+	}
+	
+	/**
+	 * @return the list of commands
+	 */
+	public static Set<String> getCommands() {
+		return Collections.unmodifiableSet(commands.keySet());
 	}
 
 	public synchronized static String removeCommand(String command){
