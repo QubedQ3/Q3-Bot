@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.regex.Pattern;
 
+
 import com.q3.qubedBot.irc.IRCChannel;
 import com.q3.qubedBot.irc.IRCServer;
 import com.q3.qubedBot.streamAPIs.beam.Beam_API;
@@ -13,9 +14,11 @@ import com.q3.qubedBot.streamAPIs.hitBox.HitBox_API;
 import com.q3.qubedBot.streamAPIs.hitBox.HitBox_Stream;
 import com.q3.qubedBot.streamAPIs.twitch.Twitch_API;
 import com.q3.qubedBot.streamAPIs.twitch.Twitch_Stream;
+import java.util.Arrays;
 
 public class BotCommandHelper {
-    
+    private static final String opCommands = "addcommand, removecomamnd, join, leavechannel, leaveserver, shutdown";
+    private static final String nonopCommands = "listchannels, roll, twitch, hitbox, beam, commands, slap, highfive";
     private ServBot parentBot;
     
     public BotCommandHelper(ServBot qubedBot) {
@@ -64,10 +67,8 @@ public class BotCommandHelper {
                 beam(channel, sender, message);
                 break;
             case("commands"):
-                //TODO parse command
-                
+                listCommands(channel, sender, message, isOp);
                 break;
-                
             case("roll"):
                 dice(channel, sender, message);
                 break;
@@ -363,6 +364,14 @@ public class BotCommandHelper {
         {
             parentBot.sendAction(channel, "highfives " + sender + ".");
         }
+    }
+
+    private void listCommands(String channel, String sender, String message, boolean isOp) {
+        if (isOp)
+                {
+                parentBot.sendNotice(sender, "OP only Commands: " + opCommands + ".");
+                }
+                parentBot.sendMessage(channel, "General Commands: " + nonopCommands +  ", " + Main.listCommands() + ".");
     }
     
     private class JoinRunnable implements Runnable{
