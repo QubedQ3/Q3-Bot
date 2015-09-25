@@ -1,4 +1,4 @@
-# Q3-Bot
+# Q3-Bot [![Build Status](https://travis-ci.org/QubedQ3/Q3-Bot.svg?branch=dev)](https://travis-ci.org/QubedQ3/Q3-Bot)
 
 Home to Q3's source code for our IRC bot!
 
