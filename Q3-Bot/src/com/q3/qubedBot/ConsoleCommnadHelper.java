@@ -5,7 +5,6 @@
  */
 package com.q3.qubedBot;
 
-import java.util.Scanner;
 
 public class ConsoleCommnadHelper {
 
@@ -14,14 +13,12 @@ public class ConsoleCommnadHelper {
      * @param command
      * @return 
      */
-    public String runConsoleCommand(String command) {
+    public void runConsoleCommand(String command) {
     
-	  System.out.println("Enter Command: ");
-     
-      try (Scanner scanIn = new Scanner(System.in)) {
-          command = scanIn.nextLine();
-          return command;
-          
-      }            
+	  switch(command){
+	  
+	  default:
+		  System.out.println("Unknown Command");
+	  }
   }
 }
