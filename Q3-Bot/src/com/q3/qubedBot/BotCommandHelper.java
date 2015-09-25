@@ -14,7 +14,6 @@ import com.q3.qubedBot.streamAPIs.hitBox.HitBox_API;
 import com.q3.qubedBot.streamAPIs.hitBox.HitBox_Stream;
 import com.q3.qubedBot.streamAPIs.twitch.Twitch_API;
 import com.q3.qubedBot.streamAPIs.twitch.Twitch_Stream;
-import java.util.Arrays;
 
 public class BotCommandHelper {
     private static final String opCommands = "addcommand, removecomamnd, join, leavechannel, leaveserver, shutdown";

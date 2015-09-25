@@ -5,17 +5,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.Iterator;
 
 
 
 import org.jdom2.JDOMException;
-import org.jdom2.output.XMLOutputter;
 
 import com.q3.qubedBot.xml.SaveData;
 import com.q3.qubedBot.xml.XMLManager;
@@ -99,10 +95,13 @@ public class Main {
             bot.connectConsole();
         }
         //listen to console for specific commands
+        ConsoleCommnadHelper cmdhlpr = new ConsoleCommnadHelper();
         while(true){
-            
+            String command = readConsole("Enter a Command:");
+            if (!command.isEmpty())cmdhlpr.runConsoleCommand(command);
             
         }
+        
         
     }
     
@@ -120,138 +119,138 @@ public class Main {
         bots = new ArrayList<ServBot>();
         bots.add(new ServBot(botName, owner, login, loginPass));//initilize new bot
     }
-    
-    /**
-     * Method to save all information about the current running bot. As each instance can only connect to one server it is managed from here.
-     * @return Returns true if save successful and false otherwise.
-     * @throws IOException
-     */
-    public synchronized static boolean save() throws IOException{
-        if (noSave) return false;
-        XMLManager.compileConfigFile(bots, commands, streamersTwitch);
-        return true;
-    }
-    
-    //TODO Method to reload all bots?
-    
-    /**
-     * Method to get the response for the entered command.
-     * @param command Command to find a response for
-     * @return Response to command or null if command does not exist in Map
-     */
-    public synchronized static String getResponse(String command){
-        return commands.get(command);
-    }
-    
-    /**
-     * Stores a command and it's response into the map
-     * @param command Command to be used by others
-     * @param response Response that bot sends out to others
-     * @return old response if command already exists, null otherwise.
-     */
-    public synchronized static String putCommand(String command, String response){
-        return commands.put(command, response);
-    }
-    
-    /**
-     * @return 
-     */
-    public static String listCommands() {
-        String[] cmds = (commands.keySet().toArray( new String[commands.keySet().size()]));
-        StringBuilder allCmds = new StringBuilder(cmds[0]);
+        
+        /**
+         * Method to save all information about the current running bot. As each instance can only connect to one server it is managed from here.
+         * @return Returns true if save successful and false otherwise.
+         * @throws IOException
+         */
+        public synchronized static boolean save() throws IOException{
+            if (noSave) return false;
+            XMLManager.compileConfigFile(bots, commands, streamersTwitch);
+            return true;
+        }
+        
+        //TODO Method to reload all bots?
+        
+        /**
+         * Method to get the response for the entered command.
+         * @param command Command to find a response for
+         * @return Response to command or null if command does not exist in Map
+         */
+        public synchronized static String getResponse(String command){
+            return commands.get(command);
+        }
+        
+        /**
+         * Stores a command and it's response into the map
+         * @param command Command to be used by others
+         * @param response Response that bot sends out to others
+         * @return old response if command already exists, null otherwise.
+         */
+        public synchronized static String putCommand(String command, String response){
+            return commands.put(command, response);
+        }
+        
+        /**
+         * @return
+         */
+        public static String listCommands() {
+            String[] cmds = (commands.keySet().toArray( new String[commands.keySet().size()]));
+            StringBuilder allCmds = new StringBuilder(cmds[0]);
             for (int i = 1; i < cmds.length; i++){
                 allCmds.append(", " + cmds[i]);
-        
-        }
+                
+            }
             return allCmds.toString();
-    }
-    
-    
-    public synchronized static String removeCommand(String command){
-        return commands.remove(command);
-    }
-    
-    public synchronized static void removeBot(ServBot bot) {
-        bot.shutDown();
-        bots.remove(bot);
-        try {
-            save();
-        } catch (IOException e) {
-            System.out.printf("\nError saving config file\n");
-            e.printStackTrace();
         }
-    }
-    
-    public synchronized static boolean addBot(ServBot bot){
-        bot.setVerbose(debugMode);
-        boolean result =  bot.connectCommand();
-        if (result){
-            bots.add(bot);
-            return result;
-        } else{
-            return result;
-        }
-    }
-    
-    public synchronized static ServBot getBotConnectedTo(String string) {
-        for (ServBot currBot:bots){
-            if (currBot.getServer().equalsIgnoreCase(string)){
-                return currBot;
-            }
-        }
-        return null;
         
-    }
-    
-    public synchronized static String[] getConnectedChannelsOnServer(String server){
-        ServBot bot = getBotConnectedTo(server);
-        if (bot != null){
-            return bot.getChannels();
-        } else{
-            return null;
+        
+        public synchronized static String removeCommand(String command){
+            return commands.remove(command);
         }
-    }
-    
-    public synchronized static void shutItDown(boolean force) throws IOException{
-        try {
-            Main.save();
-        } catch (IOException e) {
-            if (!force)throw e;
-        }
-        for (ServBot bot:bots){
+        
+        public synchronized static void removeBot(ServBot bot) {
             bot.shutDown();
+            bots.remove(bot);
+            try {
+                save();
+            } catch (IOException e) {
+                System.out.printf("\nError saving config file\n");
+                e.printStackTrace();
+            }
         }
-        System.exit(0);
         
-    }
-    
-    public static String readConsole(String query){
-        if (devEnviro){
-            System.out.printf("%s\n", query);
-            try {
-                String result = inReader.readLine();
+        public synchronized static boolean addBot(ServBot bot){
+            bot.setVerbose(debugMode);
+            boolean result =  bot.connectCommand();
+            if (result){
+                bots.add(bot);
                 return result;
-            } catch (IOException e) {
-                System.out.printf("Error attempting to read console\n");
-            }
-            return "";
-        } else{
-            return System.console().readLine(query);
-        }
-    }
-    
-    public static String readConsolePass(String query){
-        if (devEnviro){
-            System.out.printf("%s\n", query);
-            try {
-                String result = inReader.readLine();
+            } else{
                 return result;
-            } catch (IOException e) {
-                System.out.printf("Error attempting to read console\n");
             }
-            return "";
-        } else{
-            return new String(System.console().readPassword(query));
         }
-    }
+        
+        public synchronized static ServBot getBotConnectedTo(String string) {
+            for (ServBot currBot:bots){
+                if (currBot.getServer().equalsIgnoreCase(string)){
+                    return currBot;
+                }
+            }
+            return null;
+            
+        }
+        
+        public synchronized static String[] getConnectedChannelsOnServer(String server){
+            ServBot bot = getBotConnectedTo(server);
+            if (bot != null){
+                return bot.getChannels();
+            } else{
+                return null;
+            }
+        }
+        
+        public synchronized static void shutItDown(boolean force) throws IOException{
+            try {
+                Main.save();
+            } catch (IOException e) {
+                if (!force)throw e;
+            }
+            for (ServBot bot:bots){
+                bot.shutDown();
+            }
+            System.exit(0);
+            
+        }
+        
+        public static String readConsole(String query){
+            if (devEnviro){
+                System.out.printf("%s\n", query);
+                try {
+                    String result = inReader.readLine();
+                    return result;
+                } catch (IOException e) {
+                    System.out.printf("Error attempting to read console\n");
+                }
+                return "";
+            } else{
+                return System.console().readLine(query);
+            }
+        }
+        
+        public static String readConsolePass(String query){
+            if (devEnviro){
+                System.out.printf("%s\n", query);
+                try {
+                    String result = inReader.readLine();
+                    return result;
+                } catch (IOException e) {
+                    System.out.printf("Error attempting to read console\n");
+                }
+                return "";
+            } else{
+                return new String(System.console().readPassword(query));
+            }
+        }
 }
