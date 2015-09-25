@@ -16,7 +16,12 @@ public class ConsoleCommnadHelper {
     public void runConsoleCommand(String command) {
     
 	  switch(command){
-	  
+	  case("say"):
+		  //TODO read server + channel and print message to that channel or entire server
+		  break;
+	  case("join"):
+		  //TODO ask series of questions to either join a new server or channel on a server already connected to.
+		  break;
 	  default:
 		  System.out.println("Unknown Command");
 	  }
