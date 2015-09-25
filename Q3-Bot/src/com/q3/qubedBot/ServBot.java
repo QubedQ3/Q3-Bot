@@ -257,6 +257,13 @@ public class ServBot extends PircBot {
 				try {
 					reconnect();
 					//ghost old bot? onConnect?
+					for (IRCChannel currChannel: server.getChannels()){
+						if (currChannel.getPass() == null){
+							joinChannel(currChannel.getName());
+						} else {
+							joinChannel(currChannel.getName(), currChannel.getPass());
+						}
+					}
 				} catch (Exception e) {
 					retryCount++;
 					if (retryCount > 6){
