@@ -264,12 +264,12 @@ public class ServBot extends PircBot {
 					}
 				} catch (Exception e) {
 					retryCount++;
-					if (retryCount > 6){
+					if (retryCount > 10){
 						shuttingdown = true;
 						return;
 					}
 					try {
-						Thread.sleep(5000); //retry connection in 5 seconds
+						Thread.sleep(60000); //retry connection in 5 seconds
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
