@@ -226,7 +226,7 @@ public class Main {
         
         public static String readConsole(String query){
             if (devEnviro){
-                System.out.printf("%s\n", query);
+                if (query !=null && !query.isEmpty()) System.out.printf("%s\n", query);
                 try {
                     String result = inReader.readLine();
                     return result;
@@ -241,7 +241,7 @@ public class Main {
         
         public static String readConsolePass(String query){
             if (devEnviro){
-                System.out.printf("%s\n", query);
+            	if (query !=null && !query.isEmpty()) System.out.printf("%s\n", query);
                 try {
                     String result = inReader.readLine();
                     return result;
