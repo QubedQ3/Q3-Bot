@@ -8,12 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
-
-
-
 import org.jdom2.JDOMException;
-
 import com.q3.qubedBot.xml.SaveData;
 import com.q3.qubedBot.xml.XMLManager;
 
