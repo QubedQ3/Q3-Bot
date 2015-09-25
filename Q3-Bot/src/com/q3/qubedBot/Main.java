@@ -11,6 +11,7 @@ import java.util.TreeMap;
 
 
 
+
 import org.jdom2.JDOMException;
 
 import com.q3.qubedBot.xml.SaveData;
@@ -24,23 +25,20 @@ import com.q3.qubedBot.xml.XMLManager;
  * @author JennyLeeP
  */
 public class Main {
+	
+    /**Location of the config file*/
+    public static final String configFile = "./config.xml";
+	/**Version of the bot*/
+	public static final String version = "Q3 Java IRC Bot - V0.5.W";
     
     private static List<ServBot> bots;
     private static Map<String, String> commands;
-    
-    
     private static List<String> streamersTwitch;
+    
     private static boolean noSave = false;
     private static boolean devEnviro = false; //if system.console() returns null then set this true
     private static boolean debugMode = false;
     private static BufferedReader inReader = new BufferedReader(new InputStreamReader(System.in));
-    
-    /**
-     * Location of the config file
-     */
-    public static final String configFile = "./config.xml";
-    
-    
     
     /**
      * Main Method for FelisBotus.
