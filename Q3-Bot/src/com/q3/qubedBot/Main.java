@@ -27,6 +27,7 @@ public class Main {
 	private static Map<String, String> commands;
 	private static List<String> streamersTwitch;
 	private static boolean noSave = false;
+	private static boolean keepLogs = false;
 	private static boolean devEnviro = false; //if system.console() returns null then set this true
 	private static boolean debugMode = false;
 	private static BufferedReader inReader = new BufferedReader(new InputStreamReader(System.in));
@@ -52,6 +53,7 @@ public class Main {
 		for(int i = 0; i < args.length;i++){
 			if (args[i].equals("-reset")) reset = true;
 			if (args[i].equals("-noSave")) noSave = true;
+			if (args[i].equals("-log")) setKeepLogs(true);
 		}
 		File config = new File(configFile);
 		if(reset || !config.exists()){
@@ -231,4 +233,7 @@ public class Main {
 			return new String(System.console().readPassword(query));
 		}
 	}
+
+	public static boolean getKeepLogs() {return keepLogs;}
+	public static void setKeepLogs(boolean keepLogs) {Main.keepLogs = keepLogs;}
 }

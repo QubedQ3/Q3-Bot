@@ -313,19 +313,35 @@ public class ServBot extends PircBot {
 			sendMessage(channel, "Guess who is baaaaack!");
 			sendNotice(kickerNick, "Please use the shutdown command to safely shut me down. I don't like being kicked.");
 		}
+		if(Main.getKeepLogs()){
+			String formattedMessage = (channel+" [UserName] = "+recipientNick+" [Was Kicked By] = "+kickerNick+" [Reason] = "+reason);
+			try {
+				LogHelper.writeMessage(formattedMessage);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
 	protected void onMessage(String channel, String sender, String login,
 			String hostname, String message) {
 		if (message.startsWith(commandStart)){
-
 			String lowercaseCommand = message.toLowerCase(Locale.ROOT).split(" ")[0].substring(ServBot.commandStart.length());
 			commandHelper.runBotCommand(channel, sender, message, lowercaseCommand);
 		}
-
+		if(Main.getKeepLogs()){
+			String formattedMessage = (channel+" [UserName] = "+sender+" [UsersLogin] = "+login+" [Message] = "+message+" [UsersHostName] = "+hostname);
+			try {
+				LogHelper.writeMessage(formattedMessage);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see org.jibble.pircbot.PircBot#onPrivateMessage(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
