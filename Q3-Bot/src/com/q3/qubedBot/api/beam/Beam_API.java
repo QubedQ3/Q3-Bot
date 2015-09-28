@@ -1,4 +1,4 @@
-package com.q3.qubedBot.API2.beam;
+package com.q3.qubedBot.api.beam;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
