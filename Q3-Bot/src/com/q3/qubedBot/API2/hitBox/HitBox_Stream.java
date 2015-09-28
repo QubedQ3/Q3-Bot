@@ -1,4 +1,4 @@
-package com.q3.qubedBot.api.hitBox;
+package com.q3.qubedBot.API2.hitBox;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

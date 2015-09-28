@@ -1,4 +1,4 @@
-package com.q3.qubedBot.api.twitch;
+package com.q3.qubedBot.API2.twitch;
 
 import com.google.gson.JsonObject;
 import com.q3.qubedBot.helpers.ExternalHelper;
