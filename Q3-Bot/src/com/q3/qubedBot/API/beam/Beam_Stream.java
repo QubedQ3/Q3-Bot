@@ -1,9 +1,9 @@
-package com.q3.qubedBot.streamAPIs.beam;
+package com.q3.qubedBot.API.beam;
 
 import com.google.gson.JsonObject;
 
 public class Beam_Stream {
-	
+
 boolean online;
 String username;
 String title;
@@ -11,7 +11,7 @@ String game;
 String url;
 
 public void load(JsonObject jObject) {
-	
+
 	setUser(jObject.getAsJsonPrimitive("token").getAsString());
 	setTitle(jObject.getAsJsonPrimitive("name").getAsString());
 	setGame(jObject.getAsJsonObject("type").getAsJsonPrimitive("name").getAsString());

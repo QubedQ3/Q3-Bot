@@ -1,4 +1,4 @@
-package com.q3.qubedBot.streamAPIs.twitch;
+package com.q3.qubedBot.API.twitch;
 
 import com.google.gson.JsonObject;
 /**
@@ -34,11 +34,11 @@ public class Twitch_Stream {
 	public String getStatus() {
 		return this.status; }
 	public void setStatus(String status) { this.status = status; }
-	
+
 	public String getGame() {
 		return this.game; }
 	public void setGame(String game) { this.game = game; }
-	
+
 	public String getUrl() {
 		return this.url; }
 	public void setUrl(String url) { this.url = url; }

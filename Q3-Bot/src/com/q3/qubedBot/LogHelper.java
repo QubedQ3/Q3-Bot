@@ -11,7 +11,7 @@ public class LogHelper {
 	private static String path = "./logs";
 
 /**
- * 
+ *
  * @param message
  * @throws IOException
  */
@@ -19,7 +19,7 @@ public class LogHelper {
 
 		File file = new File(path+"/"+getDate()+".txt");
 		PrintWriter output;
-		
+
 		if (!file.exists()){
 			file.getParentFile().mkdir();
 			output = new PrintWriter(new FileWriter(file,true));
@@ -28,11 +28,11 @@ public class LogHelper {
 		}else {
 			output = new PrintWriter(new FileWriter(file,true));
 			output.printf("%s\r\n", message);
-			output.close();		
+			output.close();
 		}
 	}
 	/**
-	 * 
+	 *
 	 * @return fomatted date string "yyyy-MM-dd"
 	 */
 	public static String getDate(){

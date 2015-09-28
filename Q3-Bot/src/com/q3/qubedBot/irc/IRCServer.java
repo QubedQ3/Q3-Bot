@@ -55,7 +55,7 @@ public class IRCServer {
 	public synchronized Set<String> getChannelNames() {
 		return Collections.unmodifiableSet(channels.keySet());
 	}
-	
+
 	/**
 	 * Get the IRCChannel objects for the saved channels for this server
 	 * @return
@@ -72,7 +72,7 @@ public class IRCServer {
 	public synchronized IRCChannel getChannel(String channelName){
 		return channels.get(channelName);
 	}
-	
+
 	public synchronized boolean isConnectedTo(String channelName){
 		return channels.containsKey(channelName);
 	}

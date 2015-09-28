@@ -54,7 +54,7 @@ public class XMLManager {
 				String loginPass = currBot.getLoginPass();
 				if (currBot.isPassSaved()) elemCurrBot.setAttribute("LoginPass", loginPass);
 				//save single server associated with this bot
-				IRCServer currServer = currBot.getIRCServer(); 
+				IRCServer currServer = currBot.getIRCServer();
 				Element elemCurrServer = new Element("Server");//<Server Address="">
 				elemCurrServer.setAttribute("Address", currServer.getServerAddress());
 				//add support here for servers with passwords if I need it
@@ -62,7 +62,7 @@ public class XMLManager {
 				Element currServerChannels = new Element("Channels");//<Channels>
 				for (IRCChannel currChannel:currServer.getChannels()){
 					Element elemCurrChannel = new Element("Channel");
-					elemCurrChannel.setAttribute("Name",currChannel.getName().substring(1)); //<Channel> 
+					elemCurrChannel.setAttribute("Name",currChannel.getName().substring(1)); //<Channel>
 					if (currChannel.getPass() != null) elemCurrChannel.setAttribute("Pass", currChannel.getPass());
 					//save ops for this channel
 					Element elemCurrChannelOps = new Element("Ops");//<Ops>
@@ -150,7 +150,7 @@ public class XMLManager {
 		for (Element currCommand:elemCommands.getChildren("Command")){
 			commands.put(currCommand.getAttributeValue("Command"), currCommand.getAttributeValue("Response"));
 		}
-		Element elemStreamerList = elemRoot.getChild("Streamers"); 
+		Element elemStreamerList = elemRoot.getChild("Streamers");
 		List<String> streamersTwitch = new ArrayList<String>();
 		Element elemStreamersTwitch = elemStreamerList.getChild("Twitch");
 		for (Element currStreamer:elemStreamersTwitch.getChildren("Streamer")){

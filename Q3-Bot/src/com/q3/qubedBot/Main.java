@@ -15,7 +15,7 @@ import com.q3.qubedBot.xml.SaveData;
 import com.q3.qubedBot.xml.XMLManager;
 
 /**
- * Main class for running bots. Handles the list of bots as a single bot can only connect to one server. 
+ * Main class for running bots. Handles the list of bots as a single bot can only connect to one server.
  * Also holds a map of commands to responses for use by all the bots.
  * Contains methods for handling the saving of all bots.
  * @author Water_Cat1
@@ -157,11 +157,11 @@ public class Main {
         	StringBuilder allCmds = new StringBuilder(cmds[0]);
         for (int i = 1; i < cmds.length; i++){
             allCmds.append(", " + cmds[i]);
-            
+
         }
         return allCmds.toString();
         }
-        
+
     }
 	public synchronized static String removeCommand(String command){
 		return commands.remove(command);
@@ -235,7 +235,7 @@ public class Main {
             return System.console().readLine(query);
         }
     }
-    
+
     public static String readConsolePass(String query){
         if (devEnviro){
         	if (query !=null && !query.isEmpty()) System.out.printf("%s\n", query);

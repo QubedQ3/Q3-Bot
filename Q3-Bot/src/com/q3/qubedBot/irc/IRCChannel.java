@@ -17,7 +17,7 @@ public class IRCChannel {
 	private Set<String> ops;
 	private boolean botIsOP = false;
 
-	
+
 	/**
 	 * Create an instance of IRCChannel supply the name, password and set of ops
 	 * @param name
@@ -39,7 +39,7 @@ public class IRCChannel {
 		this.ops = new HashSet<String>();
 		this.name = name;
 	}
-	
+
 	public IRCChannel(String name, String pass){
 		super();
 		this.ops = new HashSet<String>();
@@ -54,7 +54,7 @@ public class IRCChannel {
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * Get the saved channel password
 	 * @return
@@ -88,7 +88,7 @@ public class IRCChannel {
 	public boolean removeOp(String name){
 		return ops.remove(name);
 	}
-	
+
 	public boolean checkOp(String name){
 		return ops.contains(name);
 	}
@@ -96,7 +96,7 @@ public class IRCChannel {
 	public void setBotIsOp(boolean opStatus){
 		botIsOP = opStatus;
 	}
-	
+
 	public boolean getBotIsOp(){
 		return botIsOP;
 	}

@@ -1,8 +1,8 @@
-package com.q3.qubedBot.streamAPIs.hitBox;
+package com.q3.qubedBot.API.hitBox;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.q3.qubedBot.streamAPIs.JsonHelper;
+import com.q3.qubedBot.API.JsonHelper;
 
 
 public class HitBox_API {
@@ -14,10 +14,10 @@ public class HitBox_API {
 			JsonObject userJsonObject = JsonHelper.readJsonFromUrl("http://api.hitbox.tv/user/"+channelName);
 			JsonObject channelJsonObject = JsonHelper.readJsonFromUrl("http://api.hitbox.tv/media/live/"+channelName);
 			HitBox_Stream stream = new HitBox_Stream();
-			
+
 			if (userJsonObject.getAsJsonPrimitive("is_live").getAsInt() != 0){
 				stream.setOnline(true);
-				stream.load(channelJsonObject);	
+				stream.load(channelJsonObject);
 			}
 			else
 			{
@@ -31,5 +31,3 @@ public class HitBox_API {
 		return null;
 	}
 }
-
-

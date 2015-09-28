@@ -8,12 +8,12 @@ import java.util.regex.Pattern;
 
 import com.q3.qubedBot.irc.IRCChannel;
 import com.q3.qubedBot.irc.IRCServer;
-import com.q3.qubedBot.streamAPIs.beam.Beam_API;
-import com.q3.qubedBot.streamAPIs.beam.Beam_Stream;
-import com.q3.qubedBot.streamAPIs.hitBox.HitBox_API;
-import com.q3.qubedBot.streamAPIs.hitBox.HitBox_Stream;
-import com.q3.qubedBot.streamAPIs.twitch.Twitch_API;
-import com.q3.qubedBot.streamAPIs.twitch.Twitch_Stream;
+import com.q3.qubedBot.API.beam.Beam_API;
+import com.q3.qubedBot.API.beam.Beam_Stream;
+import com.q3.qubedBot.API.hitBox.HitBox_API;
+import com.q3.qubedBot.API.hitBox.HitBox_Stream;
+import com.q3.qubedBot.API.twitch.Twitch_API;
+import com.q3.qubedBot.API.twitch.Twitch_Stream;
 
 public class BotCommandHelper {
 	private static final String opCommands = "addcommand, removecomamnd, join, leavechannel, leaveserver, shutdown";

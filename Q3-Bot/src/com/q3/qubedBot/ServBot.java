@@ -39,7 +39,7 @@ public class ServBot extends PircBot {
 
 	private boolean shuttingdown = false;
 	private boolean savePass = false;
-	
+
 	/**String that this bot will recognize as a command to it*/
 	public static final String commandStart = "!";//TODO maybe save this into the XML file per server? configure on startup/with command
 
@@ -156,7 +156,7 @@ public class ServBot extends PircBot {
 	}
 
 	/**
-	 * Method to make bot connect to supplied server. 
+	 * Method to make bot connect to supplied server.
 	 * @param newServer New server to connect to
 	 */
 	public boolean connectCommand(){
@@ -215,7 +215,7 @@ public class ServBot extends PircBot {
 	}
 
 	/**
-	 * Get the login password stored by this bot 
+	 * Get the login password stored by this bot
 	 * @return
 	 */
 	public String getLoginPass() {
@@ -248,7 +248,7 @@ public class ServBot extends PircBot {
 		return voiceUsers;
 	}
 
-	public void onDisconnect() { //TODO 
+	public void onDisconnect() { //TODO
 		if (!shuttingdown){
 			int retryCount = 0;
 			while (!isConnected()) {
@@ -346,7 +346,7 @@ public class ServBot extends PircBot {
 			}
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.jibble.pircbot.PircBot#onPrivateMessage(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */

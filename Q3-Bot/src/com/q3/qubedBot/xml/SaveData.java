@@ -43,7 +43,7 @@ public class SaveData {
 	public Map<String, String> getCommands() {
 		return commands;
 	}
-	
+
 	public List<String> getTwitchStreamers(){
 		return streamersTwitch;
 	}

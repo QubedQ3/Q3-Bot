@@ -48,7 +48,7 @@ public class ConsoleCommnadHelper {
 			String in = Main.readConsole("");
 			if (in.startsWith(ServBot.commandStart) || in.startsWith("!")){//keep ! as a defult for the console. / still used by irc
 				String commandIn;
-				if (in.startsWith(ServBot.commandStart)){ 
+				if (in.startsWith(ServBot.commandStart)){
 					commandIn = in.substring(ServBot.commandStart.length());
 				}else {
 					commandIn = in.substring(1);
