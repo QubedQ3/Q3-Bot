@@ -37,7 +37,8 @@ public class Main {
 	 */
 	public static final String configFile = "./config.xml";
 
-
+	/**Version of the bot*/
+	public static final String version = "Q3 Java IRC Bot - V0.5.W";
 
 	/**
 	 * Main Method for FelisBotus.
@@ -145,7 +146,18 @@ public class Main {
 	public synchronized static String putCommand(String command, String response){
 		return commands.put(command, response);
 	}
-
+	/**
+     * @return
+     */
+    public static String listCommands() {
+        String[] cmds = (commands.keySet().toArray( new String[commands.keySet().size()]));
+        StringBuilder allCmds = new StringBuilder(cmds[0]);
+        for (int i = 1; i < cmds.length; i++){
+            allCmds.append(", " + cmds[i]);
+            
+        }
+        return allCmds.toString();
+    }
 	public synchronized static String removeCommand(String command){
 		return commands.remove(command);
 	}
@@ -160,7 +172,7 @@ public class Main {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public synchronized static boolean addBot(ServBot bot){
 		bot.setVerbose(debugMode);
 		boolean result =  bot.connectCommand();
@@ -190,7 +202,7 @@ public class Main {
 			return null;
 		}
 	}
-	
+
 	public synchronized static void shutItDown(boolean force) throws IOException{
 		try {
 			Main.save();
@@ -205,34 +217,34 @@ public class Main {
 	}
 
 	public static String readConsole(String query){
-		if (devEnviro){
-			System.out.printf("%s\n", query);
-			try {
-				String result = inReader.readLine();
-				return result;
-				} catch (IOException e) {
-					System.out.printf("Error attempting to read console\n");
-				}
-			return "";
-		} else{
-			return System.console().readLine(query);
-		}
-	}
-
-	public static String readConsolePass(String query){
-		if (devEnviro){
-			System.out.printf("%s\n", query);
-			try {
-				String result = inReader.readLine();
-				return result;
-				} catch (IOException e) {
-					System.out.printf("Error attempting to read console\n");
-				}
-			return "";
-		} else{
-			return new String(System.console().readPassword(query));
-		}
-	}
+        if (devEnviro){
+            if (query !=null && !query.isEmpty()) System.out.printf("%s\n", query);
+            try {
+                String result = inReader.readLine();
+                return result;
+            } catch (IOException e) {
+                System.out.printf("Error attempting to read console\n");
+            }
+            return "";
+        } else{
+            return System.console().readLine(query);
+        }
+    }
+    
+    public static String readConsolePass(String query){
+        if (devEnviro){
+        	if (query !=null && !query.isEmpty()) System.out.printf("%s\n", query);
+            try {
+                String result = inReader.readLine();
+                return result;
+            } catch (IOException e) {
+                System.out.printf("Error attempting to read console\n");
+            }
+            return "";
+        } else{
+            return new String(System.console().readPassword(query));
+        }
+    }
 
 	public static boolean getKeepLogs() {return keepLogs;}
 	public static void setKeepLogs(boolean keepLogs) {Main.keepLogs = keepLogs;}
