@@ -151,12 +151,17 @@ public class Main {
      */
     public static String listCommands() {
         String[] cmds = (commands.keySet().toArray( new String[commands.keySet().size()]));
-        StringBuilder allCmds = new StringBuilder(cmds[0]);
+        if (cmds.length == 0){
+        	return " ";
+        }else {
+        	StringBuilder allCmds = new StringBuilder(cmds[0]);
         for (int i = 1; i < cmds.length; i++){
             allCmds.append(", " + cmds[i]);
             
         }
         return allCmds.toString();
+        }
+        
     }
 	public synchronized static String removeCommand(String command){
 		return commands.remove(command);

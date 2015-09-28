@@ -378,7 +378,7 @@ public class BotCommandHelper {
 		{
 			parentBot.sendNotice(sender, "OP only Commands: " + opCommands + ".");
 		}
-		parentBot.sendMessage(channel, "General Commands: " + nonopCommands +  ", " + Main.listCommands() + ".");
+		parentBot.sendNotice(sender, "General Commands: " + nonopCommands +  ", " + Main.listCommands() + ".");
 	}
 
 	private class JoinRunnable implements Runnable{
