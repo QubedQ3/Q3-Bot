@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.regex.Pattern;
 
+
 import com.q3.qubedBot.irc.IRCChannel;
 import com.q3.qubedBot.irc.IRCServer;
 import com.q3.qubedBot.streamAPIs.beam.Beam_API;
@@ -15,7 +16,8 @@ import com.q3.qubedBot.streamAPIs.twitch.Twitch_API;
 import com.q3.qubedBot.streamAPIs.twitch.Twitch_Stream;
 
 public class BotCommandHelper {
-
+	private static final String opCommands = "addcommand, removecomamnd, join, leavechannel, leaveserver, shutdown";
+	private static final String nonopCommands = "listchannels, roll, twitch, hitbox, beam, commands, slap, highfive";
 	private ServBot parentBot;
 
 	public BotCommandHelper(ServBot qubedBot) {
@@ -49,7 +51,7 @@ public class BotCommandHelper {
 		break;
 		case("join"):
 			Thread thread = new Thread(new JoinRunnable(sender, message, isOp));
-			thread.start();
+		thread.start();
 		break;
 		case("shutdown"):
 			shutdownBot(sender, message, isOp);
@@ -64,10 +66,8 @@ public class BotCommandHelper {
 			beam(channel, sender, message);
 		break;
 		case("commands"):
-			//TODO parse command
-
-			break;
-
+			listCommands(channel, sender, message, isOp);
+		break;
 		case("roll"):
 			dice(channel, sender, message);
 		break;
@@ -323,14 +323,22 @@ public class BotCommandHelper {
 		String[] splitMessage = message.split(" ");
 		if (splitMessage.length == 2 || (splitMessage.length == 3 && splitMessage[2].equalsIgnoreCase(parentBot.getServer()))){ //get the channels of the current server
 			String[] channelNames = parentBot.getChannels();
+			StringBuilder channelList = new StringBuilder(channelNames[0]);
+			for (int i = 1; i < channelNames.length; i++){
+				channelList.append(", " + channelNames[i]);
+			}
 			parentBot.sendMessage(channel, "Channels in this server I am currently connected to are:");
-			parentBot.sendMessage(channel, String.join(", ", channelNames) + ".");
+			parentBot.sendMessage(channel, channelList + ".");
 		}
 		else if (splitMessage.length == 3){
 			String[] channelNames = Main.getConnectedChannelsOnServer(splitMessage[2]);
 			if (channelNames != null){
+				StringBuilder channelList = new StringBuilder(channelNames[0]);
+				for (int i = 1; i < channelNames.length; i++){
+					channelList.append(", " + channelNames[i]);
+				}
 				parentBot.sendMessage(channel, "Channels on " + splitMessage[2] + " I am currently connected to are:");
-				parentBot.sendMessage(channel, String.join(", ", channelNames) + ".");
+				parentBot.sendMessage(channel, channelList + ".");
 			} else{
 				parentBot.sendMessage(channel, "I am not connected to " + splitMessage[2]);
 			}
@@ -363,6 +371,14 @@ public class BotCommandHelper {
 		{
 			parentBot.sendAction(channel, "highfives " + sender + ".");
 		}
+	}
+
+	private void listCommands(String channel, String sender, String message, boolean isOp) {
+		if (isOp)
+		{
+			parentBot.sendNotice(sender, "OP only Commands: " + opCommands + ".");
+		}
+		parentBot.sendMessage(channel, "General Commands: " + nonopCommands +  ", " + Main.listCommands() + ".");
 	}
 
 	private class JoinRunnable implements Runnable{

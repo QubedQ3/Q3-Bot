@@ -39,11 +39,9 @@ public class ServBot extends PircBot {
 
 	private boolean shuttingdown = false;
 	private boolean savePass = false;
-
-	/**Version of the bot*/
-	public static final String version = "Q3 Java IRC Bot - V0.5.W";
+	
 	/**String that this bot will recognize as a command to it*/
-	public static final String commandStart = "!";
+	public static final String commandStart = "!";//TODO maybe save this into the XML file per server? configure on startup/with command
 
 	/**
 	 * Constructor for when bot without server information (can be added later through other methods) Used mainly for first time creation
@@ -58,7 +56,7 @@ public class ServBot extends PircBot {
 		this.owner = owner;
 		this.setLogin(login);
 		this.loginPass = loginPass;
-		this.setVersion(version);
+		this.setVersion(Main.version);
 	}
 
 	/**
@@ -76,7 +74,7 @@ public class ServBot extends PircBot {
 		this.setLogin(login);
 		this.loginPass = loginPass;
 		this.server = currServer;
-		this.setVersion(version);
+		this.setVersion(Main.version);
 	}
 
 	/**
@@ -257,14 +255,21 @@ public class ServBot extends PircBot {
 				try {
 					reconnect();
 					//ghost old bot? onConnect?
+					for (IRCChannel currChannel: server.getChannels()){
+						if (currChannel.getPass() == null){
+							joinChannel(currChannel.getName());
+						} else {
+							joinChannel(currChannel.getName(), currChannel.getPass());
+						}
+					}
 				} catch (Exception e) {
 					retryCount++;
-					if (retryCount > 6){
+					if (retryCount > 10){
 						shuttingdown = true;
 						return;
 					}
 					try {
-						Thread.sleep(5000); //retry connection in 5 seconds
+						Thread.sleep(60000); //retry connection in 5 seconds
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
