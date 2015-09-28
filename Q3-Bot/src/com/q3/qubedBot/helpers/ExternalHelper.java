@@ -11,7 +11,7 @@ import com.google.gson.JsonObject;
  * @author JennyLeeP
  *
  */
-public class JsonHelper {
+public class ExternalHelper {
 
 	public static Gson gson = new Gson();
 
@@ -31,5 +31,9 @@ public class JsonHelper {
 			if (inStream != null)
 				inStream.close();
 		}
+	}
+	
+	public static void parseUrl(){
+		
 	}
 }

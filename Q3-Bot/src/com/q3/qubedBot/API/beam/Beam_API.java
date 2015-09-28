@@ -2,7 +2,7 @@ package com.q3.qubedBot.api.beam;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.q3.qubedBot.helpers.JsonHelper;
+import com.q3.qubedBot.helpers.ExternalHelper;
 
 public class Beam_API {
 
@@ -10,7 +10,7 @@ public class Beam_API {
 
 	public static Beam_Stream getStream(String channelName) {
 		try {
-			JsonObject userJsonObject = JsonHelper.readJsonFromUrl("https://beam.pro/api/v1/channels/"+channelName);
+			JsonObject userJsonObject = ExternalHelper.readJsonFromUrl("https://beam.pro/api/v1/channels/"+channelName);
 			Beam_Stream stream = new Beam_Stream();
 
 			if (userJsonObject.getAsJsonPrimitive("online").getAsBoolean()){

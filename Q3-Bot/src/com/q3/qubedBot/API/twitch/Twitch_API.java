@@ -1,7 +1,7 @@
 package com.q3.qubedBot.api.twitch;
 
 import com.google.gson.JsonObject;
-import com.q3.qubedBot.helpers.JsonHelper;
+import com.q3.qubedBot.helpers.ExternalHelper;
 /**
  * <pre>
  * Api Class used for getting a Json response from Twitch.tv using their API.
@@ -27,7 +27,7 @@ public class Twitch_API {
 	public static Twitch_Stream getStream(String channelname){
 		try{
 			//Twitch_Stream live = new Twitch_Stream();
-			JsonObject lO = JsonHelper.readJsonFromUrl("https://api.twitch.tv/kraken/streams/"+channelname);
+			JsonObject lO = ExternalHelper.readJsonFromUrl("https://api.twitch.tv/kraken/streams/"+channelname);
 			Twitch_Stream stream = new Twitch_Stream();
 
 			if (lO.get("stream").isJsonNull()){
@@ -41,7 +41,7 @@ public class Twitch_API {
 				/*
 				 * Stream = Online
 				 */
-				JsonObject jb = JsonHelper.readJsonFromUrl("https://api.twitch.tv/kraken/channels/"+channelname);
+				JsonObject jb = ExternalHelper.readJsonFromUrl("https://api.twitch.tv/kraken/channels/"+channelname);
 				stream.setOnline(true);
 				stream.load(jb);
 				return stream;
