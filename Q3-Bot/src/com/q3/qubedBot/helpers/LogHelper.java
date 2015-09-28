@@ -1,4 +1,4 @@
-package com.q3.qubedBot;
+package com.q3.qubedBot.helpers;
 
 import java.io.File;
 import java.io.FileWriter;

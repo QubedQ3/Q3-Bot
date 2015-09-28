@@ -1,4 +1,7 @@
-package com.q3.qubedBot;
+package com.q3.qubedBot.helpers;
+
+import com.q3.qubedBot.Main;
+import com.q3.qubedBot.ServBot;
 
 
 public class ConsoleCommnadHelper {

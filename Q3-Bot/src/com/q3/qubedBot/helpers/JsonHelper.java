@@ -1,4 +1,4 @@
-package com.q3.qubedBot.API;
+package com.q3.qubedBot.helpers;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

@@ -17,6 +17,8 @@ import org.jibble.pircbot.IrcException;
 import org.jibble.pircbot.PircBot;
 import org.jibble.pircbot.User;
 
+import com.q3.qubedBot.helpers.BotCommandHelper;
+import com.q3.qubedBot.helpers.LogHelper;
 import com.q3.qubedBot.irc.IRCChannel;
 import com.q3.qubedBot.irc.IRCServer;
 

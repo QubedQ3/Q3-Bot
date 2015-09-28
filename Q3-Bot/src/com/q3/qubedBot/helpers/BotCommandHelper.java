@@ -1,4 +1,4 @@
-package com.q3.qubedBot;
+package com.q3.qubedBot.helpers;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -6,14 +6,18 @@ import java.util.Random;
 import java.util.regex.Pattern;
 
 
+
+
+import com.q3.qubedBot.Main;
+import com.q3.qubedBot.ServBot;
+import com.q3.qubedBot.api.twitch.Twitch_API;
+import com.q3.qubedBot.api.twitch.Twitch_Stream;
 import com.q3.qubedBot.irc.IRCChannel;
 import com.q3.qubedBot.irc.IRCServer;
-import com.q3.qubedBot.API.beam.Beam_API;
-import com.q3.qubedBot.API.beam.Beam_Stream;
-import com.q3.qubedBot.API.hitBox.HitBox_API;
-import com.q3.qubedBot.API.hitBox.HitBox_Stream;
-import com.q3.qubedBot.API.twitch.Twitch_API;
-import com.q3.qubedBot.API.twitch.Twitch_Stream;
+import com.q3.qubedBot.api.beam.Beam_API;
+import com.q3.qubedBot.api.beam.Beam_Stream;
+import com.q3.qubedBot.api.hitBox.HitBox_API;
+import com.q3.qubedBot.api.hitBox.HitBox_Stream;
 
 public class BotCommandHelper {
 	private static final String opCommands = "addcommand, removecomamnd, join, leavechannel, leaveserver, shutdown";
